@@ -25,6 +25,6 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
     where e.student.id = :studentId
     """
     )
-    List<Course> findCoursesByStudendId(@Param("studendId") long studentdId);
+    List<Course> findCoursesByStudendId(@Param("studentId") long studentdId);
 
 }
