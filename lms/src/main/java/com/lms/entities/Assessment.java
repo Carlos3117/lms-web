@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
-import java.util.UUID;
 
 @Entity
 @Table(name = "Assessments")
@@ -14,7 +13,7 @@ import java.util.UUID;
 @Getter
 @Setter
 
-public class Asessment {
+public class Assessment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
