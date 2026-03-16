@@ -9,7 +9,7 @@ import java.time.Instant;
 import java.util.List;
 
 public interface AssessmentRepository extends JpaRepository<Assessment, Long> {
-
+    //Evaluaciones por estudiante en un rango de fecha.
     @Query("""
     select a
     from Assessment a
@@ -19,7 +19,7 @@ public interface AssessmentRepository extends JpaRepository<Assessment, Long> {
     List<Assessment> findAssessmentByStudendIdAndBetweenTakenAt(@Param("studentId") Long studentId,
                                                                 @Param("start") Instant start,
                                                                 @Param("end") Instant end);
-
+    // Evaluaciones por estudiante en un rango de puntaje.
     @Query("""
     select a
     from Assessment a
