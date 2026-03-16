@@ -1,5 +1,4 @@
 package com.lms.entities;
 
-public class Student {
-
+public class Course {
 }
