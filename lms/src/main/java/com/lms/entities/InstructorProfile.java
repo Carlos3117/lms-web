@@ -1,5 +1,5 @@
 package com.lms.entities;
-mport jakarta.persistence.*;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,7 +25,7 @@ public class InstructorProfile {
     @Column(nullable = false)
     private String bio;
 
-    @OnseToOne(optional = false)
+    @OneToOne(optional = false)
     @JoinColumn(name = "instructor_id" , referencedColumnName = "id")
     private Instructor instructor;
 
