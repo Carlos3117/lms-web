@@ -1,4 +1,4 @@
-package com.lms.services.impl;
+package com.lms.services;
 
 import com.lms.entities.Lesson;
 import com.lms.repositories.LessonRepository;
