@@ -1,45 +1,59 @@
 package com.lms.services;
 
 import com.lms.entities.Assessment;
-import com.lms.repositories.AssessmentRepository;
-import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.List;
 
-@Service
-public class AssessmentService {
+public interface AssessmentService {
 
-    private final AssessmentRepository assessmentRepository;
+    Assessment create(Assessment assessment);
 
-    public AssessmentService(AssessmentRepository assessmentRepository) {
-        this.assessmentRepository = assessmentRepository;
+    Assessment update(Long id, Assessment assessment);
+
+    Assessment findById(Long id);
+
+    List<Assessment> findAll();
+
+    void delete(Long id);
+
+    List<Assessment> findByStudentAndDateRange(Long studentId, Instant start, Instant end);
+
+    List<Assessment> findByStudentAndScoreRange(Long studentId, int min, int max);
+
+    double calculateAverageScoreByStudent(Long studentId);
+
+    double calculateAverageScoreByCourse(Long courseId);
+
+    Assessment getTopScoreByStudent(Long studentId);
+
+    Assessment getLowestScoreByStudent(Long studentId);
+
+    boolean existsByStudent(Long studentId);
+
+    boolean existsByCourse(Long courseId);
+
+    long countByStudent(Long studentId);
+
+    long countByCourse(Long courseId);
+
+    class AssessmentNotFoundException extends RuntimeException {
+        public AssessmentNotFoundException(String message) { super(message); }
     }
 
-    public Assessment create(Assessment assessment) {
-        return assessmentRepository.save(assessment);
+    class AssessmentInvalidException extends RuntimeException {
+        public AssessmentInvalidException(String message) { super(message); }
     }
 
-    public List<Assessment> getAll() {
-        return assessmentRepository.findAll();
+    class ScoreOutOfRangeException extends RuntimeException {
+        public ScoreOutOfRangeException(String message) { super(message); }
     }
 
-    public Assessment getById(Long id) {
-        return assessmentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Assessment no encontrado"));
+    class AssessmentDateException extends RuntimeException {
+        public AssessmentDateException(String message) { super(message); }
     }
 
-    public void delete(Long id) {
-        assessmentRepository.deleteById(id);
-    }
-
-    public List<Assessment> getByStudentAndDate(Long studentId, Instant start, Instant end) {
-        return assessmentRepository
-                .findAssessmentByStudendIdAndBetweenTakenAt(studentId, start, end);
-    }
-
-    public List<Assessment> getByStudentAndScore(Long studentId, int min, int max) {
-        return assessmentRepository
-                .findAssessmentByStudentIdAndBetweenScore(studentId, min, max);
+    class AssessmentConflictException extends RuntimeException {
+        public AssessmentConflictException(String message) { super(message); }
     }
 }
